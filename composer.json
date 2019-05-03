@@ -1,0 +1,40 @@
+{
+  "name": "geekhives/baserepository",
+  "description": "Base Repository",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jeff Simons Decena",
+      "email": "jeff.decena@yahoo.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Geekhives\\BaseRepository\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Geekhives\\BaseRepository\\Test\\": "tests/"
+    }
+  },
+  "require": {
+    "php": "^7.1",
+    "illuminate/support": "^5.6",
+    "ext-json": "*",
+    "league/fractal": "^0.17.0",
+    "nicolaslopezj/searchable": "^1.10"
+  },
+  "require-dev": {
+    "orchestra/testbench": "~3.0",
+    "phpunit/phpunit": "^7.5"
+  },
+  "minimum-stability": "dev",
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Geekhives\\BaseRepository\\ServiceProvider"
+      ]
+    }
+  }
+}
