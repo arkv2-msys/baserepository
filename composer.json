@@ -5,7 +5,9 @@
   "authors": [
     {
       "name": "Jeff Simons Decena",
-      "email": "jeff.decena@yahoo.com"
+      "email": "jeff.decena@yahoo.com",
+      "homepage": "https://jsdecena.me",
+      "role": "Software Architect"
     }
   ],
   "autoload": {
