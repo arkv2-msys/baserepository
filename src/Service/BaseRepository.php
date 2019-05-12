@@ -33,13 +33,14 @@ abstract class BaseRepository
      * @param LengthAwarePaginator $paginator
      * @param TransformerAbstract $transformer
      * @param $resourceKey
+     * @param array $includes
      * @return array
      */
-    public function paginate(LengthAwarePaginator $paginator, TransformerAbstract $transformer, $resourceKey)
+    public function paginate(LengthAwarePaginator $paginator, TransformerAbstract $transformer, $resourceKey, array $includes = [])
     {
         $resource = $this->paginator->paginate($paginator, $transformer, $resourceKey);
 
-        return $this->manager->buildData($resource);
+        return $this->manager->buildData($resource, $includes);
     }
 
     /**
