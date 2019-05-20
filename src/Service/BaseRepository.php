@@ -3,6 +3,7 @@
 namespace Geekhives\BaseRepository\Service;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
@@ -73,5 +74,19 @@ abstract class BaseRepository
         $resource = new Collection($collection, $transformer, $resourceKey);
 
         return $this->manager->buildData($resource, $includes);
+    }
+
+    /**
+     * Upload a single file in the server
+     * and return the random (string) filename if successful and (boolean) false if not
+     *
+     * @param UploadedFile $file
+     * @param null $folder
+     * @param string $disk
+     * @return false|string
+     */
+    public function uploadOne(UploadedFile $file, $folder = null, $disk = 'public')
+    {
+        return $file->store($folder, ['disk' => $disk]);
     }
 }
