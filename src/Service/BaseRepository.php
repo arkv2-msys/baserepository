@@ -130,7 +130,13 @@ abstract class BaseRepository
      * @param Builder|null $builder
      * @return mixed
      */
-    public function getPaginatedModel(Model $model, int $perPage = 25, string $orderBy = 'id', string $sortBy = 'asc', Builder $builder = null)
+    public function getPaginatedModel(
+        Model $model,
+        int $perPage = 25,
+        string $orderBy = 'id',
+        string $sortBy = 'asc',
+        Builder $builder = null
+    )
     {
         if ($builder) {
             $query = $builder;

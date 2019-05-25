@@ -24,8 +24,7 @@
     "php": "^7.1",
     "illuminate/support": "^5.6",
     "ext-json": "*",
-    "league/fractal": "^0.17.0",
-    "nicolaslopezj/searchable": "^1.10"
+    "league/fractal": "^0.17.0"
   },
   "require-dev": {
     "orchestra/testbench": "~3.0",
