@@ -37,8 +37,23 @@ abstract class BaseRepository
      * @param $resourceKey
      * @param array $includes
      * @return array
+     * @deprecated Use @transformPaginatedModel to prevent confusion on Model paginate method
      */
     public function paginate(LengthAwarePaginator $paginator, TransformerAbstract $transformer, $resourceKey, array $includes = [])
+    {
+        $resource = $this->paginator->paginate($paginator, $transformer, $resourceKey);
+
+        return $this->manager->buildData($resource, $includes);
+    }
+
+    /**
+     * @param LengthAwarePaginator $paginator
+     * @param TransformerAbstract $transformer
+     * @param $resourceKey
+     * @param array $includes
+     * @return array
+     */
+    public function transformPaginatedModel(LengthAwarePaginator $paginator, TransformerAbstract $transformer, $resourceKey, array $includes = [])
     {
         $resource = $this->paginator->paginate($paginator, $transformer, $resourceKey);
 
