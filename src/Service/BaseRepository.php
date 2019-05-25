@@ -2,6 +2,7 @@
 
 namespace Geekhives\BaseRepository\Service;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -88,5 +89,21 @@ abstract class BaseRepository
     public function uploadOne(UploadedFile $file, $folder = null, $disk = 'public')
     {
         return $file->store($folder, ['disk' => $disk]);
+    }
+
+    /**
+     * @param Model $model
+     * @param array $params
+     * @return Builder
+     */
+    public function queryBy(Model $model, array $params) : Builder
+    {
+        $query = $model->newQuery();
+
+        if (!empty($params)) {
+            $query->where($params);
+        }
+
+        return $query;
     }
 }
