@@ -121,4 +121,23 @@ abstract class BaseRepository
 
         return $query;
     }
+
+    /**
+     * @param Model $model
+     * @param int $perPage
+     * @param string $orderBy
+     * @param string $sortBy
+     * @param Builder|null $builder
+     * @return mixed
+     */
+    public function getPaginatedModel(Model $model, int $perPage = 25, string $orderBy = 'id', string $sortBy = 'asc', Builder $builder = null)
+    {
+        if ($builder) {
+            $query = $builder;
+        } else {
+            $query = $model->newQuery();
+        }
+
+        return $query->orderBy($orderBy, $sortBy)->paginate($perPage);
+    }
 }
