@@ -141,7 +141,7 @@ abstract class BaseRepository
         if ($builder) {
             $query = $builder;
         } else {
-            $query = $model->newQuery();
+            $query = $model;
         }
 
         return $query->orderBy($orderBy, $sortBy)->paginate($perPage);
