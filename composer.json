@@ -17,7 +17,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Geekhives\\BaseRepository\\Test\\": "tests/"
+      "Geekhives\\BaseRepository\\Tests\\": "tests/"
     }
   },
   "require": {
