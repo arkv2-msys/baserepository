@@ -10,3 +10,10 @@ phases:
     commands:
       - echo Build completed on `date`
       - ./vendor/bin/phpunit
+cache:
+  paths:
+    - /var/cache/apt/**/*
+    - /var/lib/apt/lists/**/*
+    - /root/.composer/**/*
+    - /root/.npm/**/*
+    - /usr/lib/node_modules/**/*
