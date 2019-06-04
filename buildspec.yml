@@ -4,7 +4,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Installing composer deps
-      - composer install --no-ansi --no-dev --no-interaction --no-progress --no-scripts --optimize-autoloader
+      - composer install --no-ansi --no-interaction --no-progress --no-scripts --optimize-autoloader
 
   post_build:
     commands:
