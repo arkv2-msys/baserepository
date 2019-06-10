@@ -2,6 +2,9 @@
 
 namespace Geekhives\BaseRepository;
 
+use Geekhives\BaseRepository\Service\ExceptionHandler as Handler;
+use Illuminate\Contracts\Debug\ExceptionHandler;
+
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     /**
@@ -11,6 +14,9 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->app->singleton(
+            ExceptionHandler::class,
+            Handler::class
+        );
     }
 }
