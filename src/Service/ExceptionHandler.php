@@ -4,6 +4,9 @@ namespace Geekhives\BaseRepository\Service;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 class ExceptionHandler extends Handler
@@ -32,6 +35,7 @@ class ExceptionHandler extends Handler
      *
      * @param Exception $exception
      * @return void
+     * @throws Exception
      */
     public function report(Exception $exception)
     {
@@ -41,9 +45,9 @@ class ExceptionHandler extends Handler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param Exception $exception
-     * @return array|\Illuminate\Http\JsonResponse
+     * @return array|JsonResponse
      */
     public function render($request, Exception $exception)
     {
@@ -63,6 +67,8 @@ class ExceptionHandler extends Handler
 
             $response['errors'] = [$default];
         }
+
+        Log::info(json_encode($response));
 
         return response()->json($response, $code);
     }
@@ -90,6 +96,10 @@ class ExceptionHandler extends Handler
         return $this->jsonApiFormatErrorMessages($exception);
     }
 
+    /**
+     * @param ValidationException $exception
+     * @return array
+     */
     public function jsonApiFormatErrorMessages(ValidationException $exception)
     {
         $validationMessages = $this->getTreatedMessages($exception);
