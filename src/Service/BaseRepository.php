@@ -116,7 +116,11 @@ abstract class BaseRepository
         $query = $model->newQuery();
 
         if (!empty($params)) {
-            $query->where($params);
+            foreach ($params as $key => $param) {
+                if (!is_null($param)) {
+                    $query->where($key, $param);
+                }
+            }
         }
 
         return $query;
