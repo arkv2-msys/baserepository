@@ -36,14 +36,21 @@ abstract class BaseRepository
      * @param TransformerAbstract $transformer
      * @param $resourceKey
      * @param array $includes
+     * @param string $apiVer
      * @return array
      * @deprecated Use @transformPaginatedModel to prevent confusion on Model paginate method
      */
-    public function paginate(LengthAwarePaginator $paginator, TransformerAbstract $transformer, $resourceKey, array $includes = [])
+    public function paginate(
+        LengthAwarePaginator $paginator,
+        TransformerAbstract $transformer,
+        $resourceKey,
+        array $includes = [],
+        $apiVer = null
+    )
     {
         $resource = $this->paginator->paginate($paginator, $transformer, $resourceKey);
 
-        return $this->manager->buildData($resource, $includes);
+        return $this->manager->buildData($resource, $includes, $apiVer);
     }
 
     /**
@@ -51,13 +58,20 @@ abstract class BaseRepository
      * @param TransformerAbstract $transformer
      * @param $resourceKey
      * @param array $includes
+     * @param string $apiVer
      * @return array
      */
-    public function transformPaginatedModel(LengthAwarePaginator $paginator, TransformerAbstract $transformer, $resourceKey, array $includes = [])
+    public function transformPaginatedModel(
+        LengthAwarePaginator $paginator,
+        TransformerAbstract $transformer,
+        $resourceKey,
+        array $includes = [],
+        $apiVer = null
+    )
     {
         $resource = $this->paginator->paginate($paginator, $transformer, $resourceKey);
 
-        return $this->manager->buildData($resource, $includes);
+        return $this->manager->buildData($resource, $includes, $apiVer);
     }
 
     /**
@@ -67,13 +81,20 @@ abstract class BaseRepository
      * @param TransformerAbstract $transformer
      * @param $resourceKey
      * @param array $includes
+     * @param string $apiVer
      * @return array
      */
-    public function transformItem(Model $model, TransformerAbstract $transformer, $resourceKey, array $includes = [])
+    public function transformItem(
+        Model $model,
+        TransformerAbstract $transformer,
+        $resourceKey,
+        array $includes = [],
+        $apiVer = null
+    )
     {
         $resource = new Item($model, $transformer, $resourceKey);
 
-        return $this->manager->buildData($resource, $includes);
+        return $this->manager->buildData($resource, $includes, $apiVer);
     }
 
     /**
@@ -83,13 +104,20 @@ abstract class BaseRepository
      * @param TransformerAbstract $transformer
      * @param $resourceKey
      * @param array $includes
+     * @param string $apiVer
      * @return array
      */
-    public function transformCollection($collection, TransformerAbstract $transformer, $resourceKey, array $includes = [])
+    public function transformCollection(
+        $collection,
+        TransformerAbstract $transformer,
+        $resourceKey,
+        array $includes = [],
+        $apiVer = null
+    )
     {
         $resource = new Collection($collection, $transformer, $resourceKey);
 
-        return $this->manager->buildData($resource, $includes);
+        return $this->manager->buildData($resource, $includes, $apiVer);
     }
 
     /**
@@ -111,7 +139,7 @@ abstract class BaseRepository
      * @param array $params
      * @return Builder
      */
-    public function queryBy(Model $model, array $params) : Builder
+    public function queryBy(Model $model, array $params): Builder
     {
         $query = $model->newQuery();
 

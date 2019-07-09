@@ -10,12 +10,13 @@ class BaseManager
     /**
      * @param $resource
      * @param array $includes
+     * @param string $apiVer
      * @return array
      */
-    public function buildData($resource, array $includes = []) : array
+    public function buildData($resource, array $includes = [], $apiVer = null) : array
     {
         $manager = new Manager;
-        $manager->setSerializer(new JsonApiSerializer(config('app.url')));
+        $manager->setSerializer(new JsonApiSerializer(config('app.url') . $apiVer));
         $manager->parseIncludes($includes);
 
         return $manager->createData($resource)->toArray();
