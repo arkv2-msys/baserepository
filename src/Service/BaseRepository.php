@@ -135,13 +135,17 @@ abstract class BaseRepository
     }
 
     /**
-     * @param Model $model
+     * @param Model|Builder $modelOrBuilder
      * @param array $params
      * @return Builder
      */
-    public function queryBy(Model $model, array $params): Builder
+    public function queryBy($modelOrBuilder, array $params) : Builder
     {
-        $query = $model->newQuery();
+        if ($modelOrBuilder instanceof Model) {
+            $query = $modelOrBuilder->newQuery();
+        } else {
+            $query = $modelOrBuilder; // Builder
+        }
 
         if (!empty($params)) {
             foreach ($params as $key => $param) {
