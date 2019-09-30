@@ -14,9 +14,15 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function boot()
     {
-        $this->app->singleton(
-            ExceptionHandler::class,
-            Handler::class
-        );
+        $this->publishes([
+            dirname(__DIR__) . '/config' => config_path()
+        ], 'baserepository');
+
+        if (config('baserepository.exception')) {
+            $this->app->singleton(
+                ExceptionHandler::class,
+                Handler::class
+            );
+        }
     }
 }

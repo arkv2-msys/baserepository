@@ -19,4 +19,6 @@
     }
 ```
 
+- Publish package config `php artisan vendor:publish --tag=baserepository --force`
+
 - Run `composer install`
