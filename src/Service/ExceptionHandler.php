@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
+use Throwable;
 
 class ExceptionHandler extends Handler
 {
@@ -33,11 +34,11 @@ class ExceptionHandler extends Handler
     /**
      * Report or log an exception.
      *
-     * @param Exception $exception
+     * @param Throwable $exception
      * @return void
-     * @throws Exception
+     * @throws Throwable
      */
-    public function report(Exception $exception)
+    public function report(Throwable $exception)
     {
         parent::report($exception);
     }
@@ -46,10 +47,10 @@ class ExceptionHandler extends Handler
      * Render an exception into an HTTP response.
      *
      * @param Request $request
-     * @param Exception $exception
+     * @param Throwable $exception
      * @return array|JsonResponse
      */
-    public function render($request, Exception $exception)
+    public function render($request, Throwable $exception)
     {
         $error = $this->convertExceptionToResponse($exception);
         $response = [];
